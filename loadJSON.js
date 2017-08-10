@@ -30,7 +30,7 @@ request.post('http://127.0.0.1:3000/api/getUserToken', {form: auth}, function(re
     token = (JSON.parse(res.body).token);
     //console.log(token);
     token = 'Bearer '+token;
-    var atletas = JSON.parse(fs.readFileSync('atletas.json', 'utf8'));
+    var jsonFile = JSON.parse(fs.readFileSync('atletas.json', 'utf8'));
    
     for(i=0;i<atletas.length;i++)
     {
@@ -41,7 +41,7 @@ request.post('http://127.0.0.1:3000/api/getUserToken', {form: auth}, function(re
             'cache-control': 'no-cache',
             authorization: token,
             'content-type': 'application/json' },
-          body: atletas[i],
+          body: jsonFile[i],
           json: true };
         
           request(options, function (error, response, body) {
